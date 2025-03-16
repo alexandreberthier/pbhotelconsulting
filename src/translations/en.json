@@ -1,0 +1,84 @@
+{
+
+  "about": "About",
+  "contact": "Contact",
+  "team": "Team",
+  "services": "Services",
+
+  "heroText": "35 years of experience in the hospitality industry – at your service.",
+  "aboutUs": "About Us",
+  "aboutText1": "PB Hotel Consulting is a globally operating hotel management consulting firm led by Pierre Berthier, a graduate of the prestigious Lausanne Hotel School.",
+  "aboutText2": "With over 30 years of experience – from the first position as a bellboy to leading international hotel chains – we set new standards in the hospitality and tourism industry.",
+  "aboutText3": "Our services are available in three languages: English, Spanish, and French, ensuring seamless communication and personalized support.",
+  "aboutText4": "At PB Hotel Consulting, our clients come first. Their needs shape our approach, and our focus is on creating real value for their businesses—all at competitive and transparent rates.",
+
+  "ourServices" : "Our Services",
+  "serviceCardTitle1": "Hotel Investments & Financing",
+  "serviceCardSubTitle1": "Smart investments for sustainable growth",
+  "serviceCardInfo1": "We assist in purchasing, selling, or leasing hotel properties. Our feasibility studies and financial analyses ensure profitable investments. Additionally, we connect you with trusted investors and financing options.",
+
+  "serviceCardTitle2": "From Concept to Completion",
+  "serviceCardSubTitle2": "Strategic planning & hotel design solutions",
+  "serviceCardInfo2": "We provide viability studies, architectural design, and remodeling expertise for hotels, resorts, and tourism projects. Our network of specialists ensures high-end, functional, and guest-centric designs.",
+
+  "serviceCardTitle3": "Maximizing Hotel Profitability",
+  "serviceCardSubTitle3": "Operational efficiency & cost control",
+  "serviceCardInfo3": "We analyze hotel assets, purchasing management, and operational costs to optimize profitability. Our strategies help streamline management, improve service quality, and reduce expenses.",
+
+  "serviceCardTitle4": "Boost Your Hotel’s Visibility",
+  "serviceCardSubTitle4": "Targeted strategies for better bookings",
+  "serviceCardInfo4": "Our marketing experts enhance brand positioning, develop market research, and create tailored commercialization strategies. We help attract the right customers through modern sales techniques.",
+
+  "serviceCardTitle5": "Quality & Compliance Standards",
+  "serviceCardSubTitle5": "Secure certifications & improve service quality",
+  "serviceCardInfo5": "We assist in obtaining hospitality certifications, food safety audits, and security compliance. Environmental responsibility and customer safety are our priorities for your hotel's reputation.",
+
+  "serviceCardTitle6": "Mystery Shopping & Guest Experience",
+  "serviceCardSubTitle6": "Unbiased hotel service evaluations",
+  "serviceCardInfo6": "We conduct mystery guest assessments to evaluate service quality, staff performance, and operational efficiency. Get detailed reports to refine guest satisfaction and boost your reputation.",
+
+  "serviceCardTitle7": "Recruitment of Hospitality Experts",
+  "serviceCardSubTitle7": "Find the right leaders for your hotel",
+  "serviceCardInfo7": "We help you recruit top-tier talent for executive and operational roles. Our tailored headhunting ensures your team aligns with your hotel’s vision, enhancing guest experiences and profitability.",
+
+  "serviceCardTitle8": "Comprehensive Hotel Audits",
+  "serviceCardSubTitle8": "Optimize operations & increase revenue",
+  "serviceCardInfo8": "We conduct in-depth evaluations of hotel operations, finances, and management. Our reports identify inefficiencies and recommend solutions to enhance profitability and guest satisfaction.",
+
+  "ourClients" : "Our Clients",
+
+  "slideAuthor1": "Piro Hernandez",
+  "slidePosition1": "Regional Director Americas-East",
+  "slideResort1": "Hotel Representation Services",
+  "slideText1": "I worked with Pierre Berthier as a supplier of hospitality services for over 10 years. His professionalism, dedication, and expertise always exceeded expectations.",
+
+  "slideAuthor2": "Edgar Garin",
+  "slidePosition2": "VP Development",
+  "slideResort2": "Radisson Hotels & Resorts Latin America",
+  "slideText2": "Pierre consistently anticipated market trends and adapted hotel strategies for maximum profitability. His leadership helped establish Hotel Libertador as a market leader.",
+
+  "slideAuthor3": "Roland Fasel",
+  "slidePosition3": "General Manager",
+  "slideResort3": "InterContinental London Park Lane",
+  "slideText3": "I've known Pierre for 25 years since our time at Lausanne Hotel School. His dedication and expertise in the South American market make him a valuable consultant.",
+
+  "slideAuthor4": "Antoine Noens",
+  "slidePosition4": "Product Director",
+  "slideResort4": "Best Tours Belgium",
+  "slideText4": "Under Pierre’s management, Hoteles Libertador set a new standard in the industry. His leadership ensured high service quality despite regional challenges.",
+
+  "slideAuthor5": "Ewald Biemans",
+  "slidePosition5": "Owner and Manager",
+  "slideResort5": "Bucuti Beach & Tara Beach Suites",
+  "slideText5": "Pierre is a highly professional hotelier with over 10 years of experience leading Libertador Resorts. His insights and industry knowledge have greatly benefited our collaborations.",
+
+  "slideAuthor6": "Richard Lewis",
+  "slidePosition6": "Managing Director, Europe, Middle East & Africa",
+  "slideResort6": "Preferred Hotel Group",
+  "slideText6": "Pierre understands both hotel owners' and guests' needs, offering a unique perspective in a highly competitive market. His deep industry knowledge is invaluable.",
+
+  "yearsExperience": "Years Experience",
+  "happyCustomers": "Happy Customers",
+  "successRate": "Success Rate"
+
+}

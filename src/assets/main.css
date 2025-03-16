@@ -1,0 +1,75 @@
+@font-face {
+    font-family: OpenSans;
+    src: url("../assets/fonts/OpenSans_Condensed-Regular.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: OpenSansBold;
+    src: url("../assets/fonts/OpenSans_Condensed-Bold.ttf") format("truetype");
+    font-display: swap;
+}
+
+:root {
+    --blue: #A5B4FC;
+    --orange: #FFA500;
+    --white: #FFFFFF;
+    --lightgray: #F5F5F5;
+    --darkblue: #3F51B5;
+    --pink: #FF4081;
+    --darkgray: #333333;
+    --gray: #c2c2c2;
+    --dark: #5c5c5c;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: OpenSans, sans-serif;
+    box-sizing: border-box;
+    color: var(--darkgray);
+    * {
+        box-sizing: border-box;
+    }
+}
+
+[data-theme="light"] {
+    background: var(--white);
+}
+
+
+[data-theme="dark"] {
+    background: var(--dark);
+}
+
+h1 {
+    font-size: clamp(38px, 5vw, 64px);
+    color: var(--darkblue);
+    font-family: OpenSansBold, sans-serif;
+    margin: 0;
+}
+
+h2 {
+    font-size: clamp(26px, 5vw, 46px);
+    color: var(--darkblue);
+    font-family: OpenSansBold, sans-serif;
+    margin: 0;
+}
+
+h3 {
+    font-size: clamp(20px, 5vw, 28px);
+    color: var(--darkblue);
+    font-family: OpenSansBold, sans-serif;
+    margin: 0;
+}
+
+p {
+    font-size: clamp(18px, 5vw, 24px);
+    color: var(--darkgray);
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--darkgray);
+}
