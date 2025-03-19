@@ -7,6 +7,8 @@
           @flip="setActiveIndex(index)"
           :member="member"
           :is-flipped="index === activeIndex"
+          :class="['hidden', {'fadeIn': isIntersecting}]"
+          :style="{ transitionDelay: (index * 120) + 'ms' }"
       />
     </div>
   </SectionLayout>
@@ -17,9 +19,12 @@
 import SectionLayout from "@/components/layouts/SectionLayout.vue";
 import TeamCard, {type Member} from "@/components/TeamCard.vue";
 import {onBeforeUnmount, onMounted, onUnmounted, ref, type Ref, useTemplateRef} from "vue";
+import ServiceCard from "@/components/ServiceCard.vue";
 
 const cardFlex = useTemplateRef<HTMLDivElement>('cardFlex')
 const activeIndex: Ref<number | null> = ref(null)
+const isIntersecting = ref(false);
+
 
 function setActiveIndex(index: number) {
   activeIndex.value = activeIndex.value === index ? null : index
@@ -31,19 +36,26 @@ function handleClickOutside(event: Event) {
   }
 }
 
-let observer: IntersectionObserver | null = null
+let observer: IntersectionObserver | null = null;
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
 
-  observer = new IntersectionObserver((entries, observer) => {
+  observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        cardFlex.value?.classList.add('fadeIn')
-        observer.unobserve(entry.target)
+        isIntersecting.value = true;
+        observer?.unobserve(entry.target);
       }
-    })
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
   })
-  if (cardFlex.value) observer.observe(cardFlex.value)
+
+  if (cardFlex.value) {
+    observer.observe(cardFlex.value);
+  }
 })
 
 onUnmounted(() => {
@@ -105,13 +117,27 @@ const members: Ref<Member[]> = ref([
   display: flex;
   gap: 32px;
   flex-wrap: wrap;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: all 800ms ease-in-out;
 
-  &.fadeIn {
-    transform: translateX(0);
-    opacity: 1;
+  .hidden {
+    opacity: 0;
+    transform: translateX(50%);
+    transition: all 500ms ease-in-out;
+
+    &.fadeIn {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+
+
+@media (max-width: 740px) {
+  .card-flex {
+    .hidden {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 

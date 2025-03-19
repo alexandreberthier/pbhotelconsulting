@@ -11,13 +11,13 @@
       </div>
       <h3>{{ t(service.title) }}</h3>
       <p>{{ t(service.subHeader) }}</p>
-      <div class="chevron-wrapper">
-        <img :src="getImage('ic_chevron.png')" alt="Toggle additional information">
-      </div>
     </div>
     <p
         :class="['hidden', {'grow': isOpen}]">{{t(service.info) }}
     </p>
+    <div class="chevron-wrapper">
+      <img :class="{'rotate': isOpen}" :src="getImage('ic_chevron.png')" alt="Toggle additional information">
+    </div>
   </div>
 </template>
 
@@ -87,15 +87,20 @@ const {t} = useI18n();
         height: 60px;
       }
     }
+  }
 
-    .chevron-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  .chevron-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      img {
-        width: 32px;
-        height: 32px;
+    img {
+      width: 32px;
+      height: 32px;
+      transition:  all 250ms ease-in-out;
+
+      &.rotate {
+        transform: rotate(180deg);
       }
     }
   }

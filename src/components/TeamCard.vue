@@ -47,10 +47,10 @@ const {member} = defineProps<{
 
 .card-wrapper {
   border-radius: 4px;
-  flex: 1 1 340px;
+  flex: 1 1 320px;
   cursor: pointer;
   border: none;
-  height: 400px;
+  height: 430px;
 
   &:focus {
     outline: 2px solid var(--darkblue);
@@ -95,8 +95,9 @@ const {member} = defineProps<{
 
         img {
           width: 100%;
-          height: auto;
+          height: 100%;
           object-fit: cover;
+          object-position: center;
         }
       }
 
