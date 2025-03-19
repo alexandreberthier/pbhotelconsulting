@@ -102,7 +102,7 @@ const {member} = defineProps<{
 
       .click {
         width: 30px;
-        height: 30p;
+        height: 30px;
       }
     }
 
