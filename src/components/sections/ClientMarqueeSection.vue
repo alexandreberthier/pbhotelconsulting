@@ -19,6 +19,10 @@ import {useI18n} from "vue-i18n";
 const {t} = useI18n()
 
 const clients = [
+  'ic_blue.jpeg',
+  'ic_hilton.jpeg',
+  'ic_melia.jpeg',
+  'ic_suneo.jpeg',
   'ic_thunderbird.jpg',
   'ic_playatortuga.png',
   'ic_lefoyer.png',
@@ -53,6 +57,7 @@ const allClients = computed(() => [...clients, ...clients, ...clients]);
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+
 }
 
 .logo-item img {
@@ -69,8 +74,5 @@ const allClients = computed(() => [...clients, ...clients, ...clients]);
   }
 }
 
-.logo-carousel:hover .logo-container {
-  animation-play-state: paused;
-}
 
 </style>
