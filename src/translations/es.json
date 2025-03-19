@@ -77,7 +77,42 @@
   "slideText6": "Pierre comprende las necesidades tanto de los propietarios de hoteles como de los huéspedes, ofreciendo una perspectiva única en un mercado altamente competitivo. Su profundo conocimiento del sector es invaluable.",
   "yearsExperience": "Años de experiencia",
   "happyCustomers": "Clientes satisfechos",
-  "successRate": "Tasa de éxito"
+  "successRate": "Tasa de éxito",
+
+  "memberName1": "Arq. Manuel Davilla",
+  "memberPosition1": "Diseño de interiores",
+  "memberDesc1": "Arquitecto y propietario de Creata SAC con más de 25 años de experiencia en desarrollo hotelero, diseño de interiores e infraestructura hospitalaria. Ha desarrollado más de 200,000 m² de proyectos en Lima y alrededores, incluyendo hoteles boutique y resorts. Especializado en la gestión integral de proyectos desde el diseño conceptual hasta la ejecución final.",
+
+  "memberName2": "Dr. Jorge Zúñiga",
+  "memberPosition2": "Asesor legal",
+  "memberDesc2": "Abogado especializado en turismo, derecho corporativo y administrativo. Estudió en Perú, España y Japón. Consultor legal de confianza para las principales empresas hoteleras de Perú. Habla español e inglés.",
+
+  "memberName3": "Renzo de Almeida",
+  "memberPosition3": "Marketing",
+  "memberDesc3": "Experto en marketing con más de 20 años de experiencia en ventas, planificación empresarial y transformación digital en diversas industrias. Dirigió el equipo de marketing de Aranwa Hotels Resorts & Spas. Licenciado en Administración de Empresas por la Universidad de Lima y MBA por Hult International Business School.",
+
+  "memberName4": "Julio Cobar",
+  "memberPosition4": "Finanzas",
+  "memberDesc4": "Contador Público Certificado con más de 25 años de experiencia en finanzas, contabilidad y administración en diversas industrias, incluyendo bancos, seguros y manufactura. Experto en implementación de SAP y formación universitaria. Posee maestrías en Administración de Empresas y Economía. Ha trabajado como consultor para empresas en Centroamérica, Europa, EE.UU. y Asia.",
+
+  "memberName5": "Willy Sono",
+  "memberPosition5": "Socio gerente",
+  "memberDesc5": "Ejecutivo senior con más de 35 años de experiencia en gestión multinacional en México, EE.UU. y Perú. Posee una maestría en Gestión Internacional de Thunderbird School of Global Management y una licenciatura en Economía de la Universidad del Pacífico. Amplia experiencia en ventas, consultoría corporativa y gestión comercial en la industria hotelera.",
+
+  "memberName6": "Sra. Vanessa Azcarate",
+  "memberPosition6": "Recursos humanos",
+  "memberDesc6": "Ex gerente de hotel, graduada de la Escuela de Hotelería Montemar en Lima. Trabajó en los mejores hoteles durante más de 10 años antes de fundar su propia empresa de reclutamiento. Conocida por su enfoque personalizado de selección, logrando una tasa de éxito del 99% en la asignación de candidatos a roles.",
+
+  "send": "Enviar",
+  "getInTouch": "¡Contáctanos!",
+  "name": "Nombre",
+  "organization": "Organización",
+  "email": "Correo electrónico",
+  "phone": "Teléfono",
+  "message": "Mensaje"
+
+
+
 
 
 }

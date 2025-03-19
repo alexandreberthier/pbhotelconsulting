@@ -77,7 +77,39 @@
   "slideText6": "Pierre comprend à la fois les besoins des propriétaires d'hôtels et ceux des clients, offrant une perspective unique sur un marché hautement concurrentiel. Sa profonde connaissance de l'industrie est inestimable.",
   "yearsExperience": "Années d'expérience",
   "happyCustomers": "Clients satisfaits",
-  "successRate": "Taux de succès"
+  "successRate": "Taux de succès",
+
+  "memberName1": "Arq. Manuel Davilla",
+  "memberPosition1": "Design d'intérieur",
+  "memberDesc1": "Architecte et propriétaire de Creata SAC avec plus de 25 ans d'expérience dans le développement hôtelier, la conception intérieure et l'infrastructure hospitalière. A développé plus de 200 000 m² de projets à Lima et dans les environs, y compris des hôtels-boutiques et des complexes hôteliers. Spécialisé dans la gestion complète des projets, de la conception à l'exécution finale.",
+
+  "memberName2": "Dr. Jorge Zúñiga",
+  "memberPosition2": "Conseiller juridique",
+  "memberDesc2": "Avocat spécialisé dans le tourisme, le droit des affaires et le droit administratif. A étudié au Pérou, en Espagne et au Japon. Consultant juridique de confiance pour les principales entreprises hôtelières du Pérou. Parle couramment l'espagnol et l'anglais.",
+
+  "memberName3": "Renzo de Almeida",
+  "memberPosition3": "Marketing",
+  "memberDesc3": "Expert en marketing avec plus de 20 ans d'expérience en vente, planification commerciale et transformation numérique dans plusieurs secteurs. A dirigé l'équipe marketing d'Aranwa Hotels Resorts & Spas. Diplômé en administration des affaires de l'Université de Lima et titulaire d'un MBA de Hult International Business School.",
+
+  "memberName4": "Julio Cobar",
+  "memberPosition4": "Finance",
+  "memberDesc4": "Expert-comptable certifié avec plus de 25 ans d'expérience en finance, comptabilité et administration dans divers secteurs, y compris la banque, l'assurance et la fabrication. Spécialiste de l'implémentation de SAP et de la formation universitaire. Titulaire de maîtrises en administration des affaires et en économie. Consultant pour des entreprises en Amérique centrale, en Europe, aux États-Unis et en Asie.",
+
+  "memberName5": "Willy Sono",
+  "memberPosition5": "Associé gérant",
+  "memberDesc5": "Cadre supérieur avec plus de 35 ans d'expérience en gestion multinationale au Mexique, aux États-Unis et au Pérou. Titulaire d'une maîtrise en gestion internationale de Thunderbird School of Global Management et d'une licence en économie de l'Université du Pacifique. Expérience approfondie en vente, conseil aux entreprises et gestion commerciale dans l'industrie hôtelière.",
+
+  "memberName6": "Sra. Vanessa Azcarate",
+  "memberPosition6": "Ressources humaines",
+  "memberDesc6": "Ancienne directrice d'hôtel, diplômée de l'École hôtelière Montemar à Lima. A travaillé dans les meilleurs hôtels pendant plus de 10 ans avant de fonder sa propre entreprise de recrutement. Connue pour son approche personnalisée du recrutement, avec un taux de réussite supérieur à 99 % dans l'attribution des postes.",
+
+  "getInTouch": "Contactez-nous!",
+  "send": "Envoyer",
+  "name": "Nom",
+  "organization": "Organisation",
+  "email": "E-mail",
+  "phone": "Téléphone",
+  "message": "Message"
 
 
 

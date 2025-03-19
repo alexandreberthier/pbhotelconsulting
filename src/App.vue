@@ -7,6 +7,7 @@
       <RouterView/>
     </main>
     <footer>
+      <Footer id="contact"/>
     </footer>
   </div>
 </template>
@@ -14,6 +15,7 @@
 <script setup lang="ts">
 
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/sections/Footer.vue";
 </script>
 
 <style scoped>
@@ -30,7 +32,7 @@ import Navbar from "@/components/Navbar.vue";
   }
 
   main {
-    margin-top: 100px;
+    margin: 120px 0;
     flex: 1;
     display: flex;
     flex-direction: column;

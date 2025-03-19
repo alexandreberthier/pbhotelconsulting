@@ -5,6 +5,7 @@
     <ServicesSection id="services"/>
     <ClientMarqueeSection/>
     <TestimonialSection/>
+    <TeamSection id="team"/>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import AboutSection from "@/components/sections/AboutSection.vue";
 import ServicesSection from "@/components/sections/ServicesSection.vue";
 import ClientMarqueeSection from "@/components/sections/ClientMarqueeSection.vue";
 import TestimonialSection from "@/components/sections/TestimonialSection.vue";
+import TeamSection from "@/components/sections/TeamSection.vue";
 
 </script>
 

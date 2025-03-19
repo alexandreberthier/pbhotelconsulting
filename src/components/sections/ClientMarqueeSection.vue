@@ -1,6 +1,6 @@
 <template>
   <SectionLayout :heading="t('ourClients')">
-    <div class="logo-carousel">
+    <div role="marquee" class="logo-carousel">
       <div class="logo-container">
         <div v-for="(client, index) in allClients" :key="index" class="logo-item">
           <img :src="getImage(client)" :alt="`Client logo ${index + 1}`">
@@ -43,7 +43,7 @@ const allClients = computed(() => [...clients, ...clients, ...clients]);
   display: flex;
   align-items: center;
   gap: 32px;
-  animation: scroll 14s linear infinite;
+  animation: scroll 25s linear infinite;
   width: max-content;
   will-change: transform;
 }

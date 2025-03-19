@@ -139,7 +139,7 @@ onUnmounted(() => {
 
   .left {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     img {
@@ -151,9 +151,12 @@ onUnmounted(() => {
   .right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 8px;
+    width: 100%;
 
     .links {
+      margin: 0;
       position: fixed;
       top: 0;
       left: 0;
@@ -307,6 +310,7 @@ onUnmounted(() => {
     padding: 12px 28px;
 
     .left {
+      width: 50%;
       img {
         width: 220px;
       }
@@ -314,15 +318,17 @@ onUnmounted(() => {
 
     .right {
       gap: 16px;
-      width: fit-content;
+      width: 40%;
+      justify-content: space-between;
 
       .links {
         position: static;
-        width: fit-content;
-        height: inherit;
+        width: unset;
+        height: unset;
         padding: 0;
         opacity: 1;
         flex-direction: row;
+        gap: 60px;
 
         a {
           span {

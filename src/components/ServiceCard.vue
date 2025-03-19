@@ -57,7 +57,7 @@ const {t} = useI18n();
   border: none;
 
   &:focus {
-    outline: 2px solid var(--pink);
+    outline: 2px solid var(--darkblue);
   }
 
 

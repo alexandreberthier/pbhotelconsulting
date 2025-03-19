@@ -79,6 +79,38 @@
 
   "yearsExperience": "Years Experience",
   "happyCustomers": "Happy Customers",
-  "successRate": "Success Rate"
+  "successRate": "Success Rate",
+
+  "memberName1": "Arq. Manuel Davilla",
+  "memberPosition1": "Interior Designing",
+  "memberDesc1": "Architect and owner of Creata SAC with 25+ years of experience in hotel development, interior design, and hospital infrastructure. Has developed over 200,000 m² of projects in Lima and surrounding areas, including boutique hotels and resorts. Specializes in comprehensive project management from concept design to final execution.",
+
+  "memberName2": "Dr. Jorge Zúñiga",
+  "memberPosition2": "Legal Advisor",
+  "memberDesc2": "Attorney specializing in tourism, corporate, and administrative law. Studied in Peru, Spain, and Japan. Trusted legal consultant for leading hotel companies in Peru. Fluent in Spanish & English.",
+
+  "memberName3": "Renzo de Almeida",
+  "memberPosition3": "Marketing",
+  "memberDesc3": "Marketing expert with 20+ years of experience in sales, business planning, and digital transformation across multiple industries. Led the marketing team at Aranwa Hotels Resorts & Spas. Holds a Business Administration degree from Universidad de Lima and an MBA from Hult International Business School.",
+
+  "memberName4": "Julio Cobar",
+  "memberPosition4": "Finance",
+  "memberDesc4": "Certified Public Accountant with 25+ years of experience in finance, accounting, and administration across various industries, including banks, insurance, and manufacturing. Expertise in SAP implementation and university-level training. Holds Master’s degrees in Business Administration and Economics. Consulted for companies across Central America, Europe, the USA, and Asia.",
+
+  "memberName5": "Willy Sono",
+  "memberPosition5": "Managing Partner",
+  "memberDesc5": "Senior executive with over 35 years of multinational management experience in Mexico, USA, and Peru. Holds a Master’s in International Management from Thunderbird School of Global Management and a BA in Economics from the University of the Pacific. Extensive expertise in sales, corporate consulting, and commercial management in the hospitality industry.",
+
+  "memberName6": "Sra. Vanessa Azcarate",
+  "memberPosition6": "Human Resources",
+  "memberDesc6": "Former hotel manager, graduated from Montemar Hotel School in Lima. Worked in top hotels for over 10 years before founding her own headhunting company. Known for her personalized recruitment approach, achieving a 99%+ success rate in matching candidates to roles.",
+
+  "send": "Send",
+  "getInTouch" : "Get in touch!",
+  "name": "Name",
+  "organization": "Organization",
+  "email": "E-Mail",
+  "phone": "Phone",
+  "message": "Message"
 
 }
