@@ -13,7 +13,7 @@
         </li>
       </ul>
       <div class="selection">
-        <LightToggle/>
+        <LightToggle v-if="false"/>
         <DropDown
             v-model:selected-value="globalStore.selectedLanguage"
             :options="globalStore.languageOptions"

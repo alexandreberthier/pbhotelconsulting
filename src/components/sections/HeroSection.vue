@@ -13,7 +13,7 @@ import {useI18n} from "vue-i18n";
 
 const {t} = useI18n()
 
-const bgImage = computed(() => `url('${getImage('ic_hero.jpg')}')`)
+const bgImage = computed(() => `url('${getImage('ic_hero_reception.jpg')}')`)
 const isTicking: Ref<boolean> = ref(false)
 const scrollYPosition: Ref<number> = ref(0)
 const computedPxUnit = computed(() => `${scrollYPosition.value * 0.3}px`)
@@ -53,12 +53,23 @@ onUnmounted(() => {
   justify-content: center;
   overflow: hidden;
   scroll-behavior: smooth;
+  position: relative;
+  z-index: -1;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+  }
 
   h1 {
     width: 55%;
     text-align: center;
     color: var(--white);
     will-change: transform;
+    z-index: 2;
   }
 }
 
