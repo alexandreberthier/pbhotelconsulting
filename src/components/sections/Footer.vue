@@ -63,6 +63,7 @@ import InputField from "@/components/InputField.vue";
 import {InputType} from "@/components/InputFieldConfig.ts";
 import DynamicButton from "@/components/DynamicButton.vue";
 import {useI18n} from "vue-i18n";
+import emailjs from '@emailjs/browser';
 
 interface Social {
   href: string,
@@ -73,7 +74,7 @@ interface InputField {
   validateField: () => boolean
 }
 
-const {t}= useI18n()
+const {t} = useI18n()
 
 const socials: Ref<Social[]> = ref([
   {
@@ -103,24 +104,41 @@ const isLoading: Ref<boolean> = ref(false)
 async function send() {
   isLoading.value = true;
 
-  const inputRefs = [nameRef.value, companyRef.value, emailRef.value, messageRef.value]
+  const inputRefs = [nameRef.value, companyRef.value, emailRef.value, messageRef.value];
+  inputRefs.forEach((ref) => ref?.validateField());
 
-  inputRefs.forEach(ref => ref?.validateField())
+  await nextTick();
 
-  await nextTick()
-
-
-  const firstError = document.querySelector('.error');
+  const firstError = document.querySelector(".error");
   if (firstError) {
-    firstError.scrollIntoView({behavior: "smooth", block: "center"})
+    firstError.scrollIntoView({behavior: "smooth", block: "center"});
     isLoading.value = false;
-    return
+    return;
   }
 
-  setTimeout(() => {
-    isLoading.value = false;
-    alert('Gesendet!')
-  }, 2000)
+  try {
+    await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          user_name: name.value,
+          user_company: company.value,
+          user_email: email.value,
+          user_phone: phone.value,
+          message: message.value,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+
+    name.value = "";
+    company.value = "";
+    email.value = "";
+    phone.value = "";
+    message.value = "";
+  } catch (error) {
+  }
+
+  isLoading.value = false;
 }
 
 

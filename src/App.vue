@@ -5,6 +5,7 @@
     </nav>
     <main>
       <RouterView/>
+      <ScrollButton/>
     </main>
     <footer>
       <Footer id="contact"/>
@@ -16,6 +17,7 @@
 
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/sections/Footer.vue";
+import ScrollButton from "@/components/ScrollButton.vue";
 </script>
 
 <style scoped>

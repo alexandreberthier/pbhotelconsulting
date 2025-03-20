@@ -4,10 +4,11 @@
       <img :src="getImage('ic_pb_logo.png')" alt="Logo, back to start">
     </router-link>
     <div class="right">
-      <ul
-          :class="['links', {'show': showMenu}]">
-        <li v-for="(link, index) in navLinks" :key="index">
-          <router-link :to="{name: link.route, hash: link.hash}">
+      <ul :id="'navigation-menu'" role="menu" class="links" :class="{ 'show': showMenu }">
+        <li
+            @click="closeMenu"
+            v-for="(link, index) in navLinks" :key="index" role="menuitem">
+          <router-link :to="{ name: link.route, hash: link.hash }">
             <span>{{ t(link.text) }}</span>
           </router-link>
         </li>
@@ -26,7 +27,7 @@
           aria-controls="navigation-menu"
           aria-label="Navigation umschalten"
       >
-        <span></span>
+        <span aria-hidden="true"></span>
       </button>
     </div>
   </div>
@@ -39,12 +40,14 @@ import LightToggle from "@/components/LightToggle.vue";
 import {onMounted, onUnmounted, ref, type Ref} from "vue";
 import {getImage} from "@/utils/ImageUtils.ts";
 import {useI18n} from "vue-i18n";
+import {useRoute} from "vue-router";
 
 interface Link {
   route: string,
   text: string,
   hash?: string
 }
+
 const {t} = useI18n()
 
 const globalStore = useGlobalStore();
@@ -53,6 +56,10 @@ const showMenu: Ref<boolean> = ref(false)
 
 function toggleMenu() {
   showMenu.value = !showMenu.value
+}
+
+function closeMenu() {
+  showMenu.value = false
 }
 
 const navLinks: Ref<Link[]> = ref([
@@ -76,8 +83,7 @@ const navLinks: Ref<Link[]> = ref([
     route: 'home',
     text: 'contact',
     hash: '#contact'
-  },
-
+  }
 ])
 
 const isScrolling: Ref<boolean> = ref(false);
@@ -220,13 +226,14 @@ onUnmounted(() => {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 40px;
-      width: 40px;
+      height: 50px;
+      width: 50px;
       border: 1px solid var(--gray);
       border-radius: 4px;
       cursor: pointer;
       z-index: 20;
       background: var(--white);
+      flex-shrink: 0;
 
       span {
         background: var(--darkblue);
@@ -311,6 +318,7 @@ onUnmounted(() => {
 
     .left {
       width: 50%;
+
       img {
         width: 220px;
       }

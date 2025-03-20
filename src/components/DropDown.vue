@@ -143,7 +143,7 @@ onUnmounted(() => {
   gap: 4px;
   cursor: pointer;
   position: relative;
-  padding: 0 6px;
+  padding: 0 10px;
   border-radius: 4px;
   border: 1px solid var(--gray);
 
@@ -155,8 +155,8 @@ onUnmounted(() => {
   .visible {
     display: flex;
     align-items: center;
-    gap: 8px;
-    height: 38px;
+    gap: 10px;
+    height: 48px;
     background: var(--white);
 
     .icon-wrapper {

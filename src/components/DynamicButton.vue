@@ -32,9 +32,18 @@ const {t} = useI18n()
   border-radius: 4px;
   height: 50px;
   cursor: pointer;
+  transition: all 250ms ease-in-out;
 
   &:focus {
     outline: 2px solid var(--darkgray);
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.8;
   }
 
   &.block {
