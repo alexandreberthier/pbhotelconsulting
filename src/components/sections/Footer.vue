@@ -16,8 +16,9 @@
                 :key="index"
                 :href="social.href"
                 target="_blank"
+                :aria-label="social.name"
             >
-              <img :src="getImage(social.image)" alt="">
+              <img :src="getImage(social.image)" :alt="social.name">
             </a>
           </div>
         </div>
@@ -69,6 +70,7 @@ import {addToast} from "@/utils/useToast.ts";
 interface Social {
   href: string,
   image: string
+  name: string
 }
 
 interface InputField {
@@ -80,11 +82,13 @@ const {t} = useI18n()
 const socials: Ref<Social[]> = ref([
   {
     href: 'https://www.linkedin.com/in/pberthier/',
-    image: 'ic_linkedin.png'
+    image: 'ic_linkedin.png',
+    name: 'LinkedIn'
   },
   {
     href: 'https://x.com/pbhconsulting',
-    image: 'ic_x.png'
+    image: 'ic_x.png',
+    name: 'X (Twitter)'
   }
 ])
 
