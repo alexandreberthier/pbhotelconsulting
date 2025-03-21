@@ -8,6 +8,10 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: {
+        title: 'PB Hotel Consulting – Global Hospitality Strategy & Development',
+        description: 'PB Hotel Consulting offers over 35 years of international experience in hotel management, development, marketing, and recruitment. We provide expert consulting for hotels, resorts, and tourism projects.'
+      }
     }
   ],
   scrollBehavior(to, from , savedPosition){
@@ -34,5 +38,29 @@ const router = createRouter({
     }
   }
 })
+
+router.beforeEach((to, from, next) => {
+  const defaultTitle = 'PB Hotel Consulting';
+
+  if (to.meta?.title) {
+    document.title = to.meta.title as string;
+  } else {
+    document.title = defaultTitle;
+  }
+
+  const description = to.meta?.description as string;
+  const metaDescription = document.querySelector('meta[name="description"]');
+
+  if (metaDescription && description) {
+    metaDescription.setAttribute('content', description);
+  } else if (description) {
+    const meta = document.createElement('meta');
+    meta.name = 'description';
+    meta.content = description;
+    document.head.appendChild(meta);
+  }
+
+  next()
+});
 
 export default router

@@ -128,7 +128,12 @@ onBeforeUnmount(() => {
   .hidden {
     opacity: 0;
     transform: translateX(-50%);
-    transition: all 500ms ease-in-out;
+    transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+
+    &:hover {
+      box-shadow: 0 6px 50px rgba(63, 81, 181, 0.25);
+    }
+
 
     &.fadeIn {
       opacity: 1;

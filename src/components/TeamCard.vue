@@ -56,6 +56,8 @@ const {member} = defineProps<{
     outline: 2px solid var(--darkblue);
   }
 
+
+
   .card-inner {
     position: relative;
     transform-style: preserve-3d;

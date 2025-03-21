@@ -6,6 +6,7 @@
     <main>
       <RouterView/>
       <ScrollButton/>
+      <Toast/>
     </main>
     <footer>
       <Footer id="contact"/>
@@ -18,6 +19,7 @@
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/sections/Footer.vue";
 import ScrollButton from "@/components/ScrollButton.vue";
+import Toast from "@/components/Toast.vue";
 </script>
 
 <style scoped>
@@ -34,7 +36,7 @@ import ScrollButton from "@/components/ScrollButton.vue";
   }
 
   main {
-    margin: 120px 0;
+    margin: 100px 0;
     flex: 1;
     display: flex;
     flex-direction: column;

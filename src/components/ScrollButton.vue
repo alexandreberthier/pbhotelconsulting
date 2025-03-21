@@ -45,12 +45,13 @@ onUnmounted(() => {
   height: 70px;
   background: var(--darkblue);
   position: fixed;
-  bottom: 20%;
+  bottom: 30%;
   right: 30px;;
   border-radius: 50%;
   cursor: pointer;
   font-size: 24px;
   transition: all 250ms ease-in-out;
+  z-index: 10;
 
 
   img {

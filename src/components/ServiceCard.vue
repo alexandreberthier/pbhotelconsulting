@@ -55,11 +55,11 @@ const {t} = useI18n();
   cursor: pointer;
   padding: 30px;
   border: none;
+  transition: all 100ms ease-in-out;
 
   &:focus {
     outline: 2px solid var(--darkblue);
   }
-
 
   .visible {
     display: flex;

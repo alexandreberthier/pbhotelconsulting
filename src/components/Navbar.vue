@@ -1,5 +1,5 @@
 <template>
-  <div aria-label="Main navigation" :class="['nav-wrapper', { shrink: isScrolling }]">
+  <div aria-label="Main navigation" class="nav-wrapper">
     <router-link class="left" :to="{name: 'home'}">
       <img :src="getImage('ic_pb_logo.png')" alt="Logo, back to start">
     </router-link>
@@ -86,46 +86,6 @@ const navLinks: Ref<Link[]> = ref([
   }
 ])
 
-const isScrolling: Ref<boolean> = ref(false);
-const prevYPosition: Ref<number> = ref(0);
-const scrollYPosition: Ref<number> = ref(0);
-const isTicking: Ref<boolean> = ref(false);
-const scrollTimeout: Ref<number | null> = ref(null);
-
-function checkScroll() {
-  if (!isTicking.value) {
-    isTicking.value = true;
-    requestAnimationFrame(() => {
-      scrollYPosition.value = window.scrollY;
-      if (scrollYPosition.value > prevYPosition.value) {
-        isScrolling.value = true;
-      }
-      prevYPosition.value = scrollYPosition.value;
-
-      if (scrollTimeout.value !== null) {
-        clearTimeout(scrollTimeout.value);
-      }
-
-      scrollTimeout.value = window.setTimeout(() => {
-        isScrolling.value = false;
-      }, 200);
-
-      isTicking.value = false;
-    })
-  }
-}
-
-onMounted(() => {
-  prevYPosition.value = window.scrollY;
-  window.addEventListener("scroll", checkScroll)
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", checkScroll)
-  if (scrollTimeout.value !== null) {
-    clearTimeout(scrollTimeout.value)
-  }
-})
 </script>
 
 <style scoped>
@@ -137,11 +97,6 @@ onUnmounted(() => {
   background: var(--white);
   height: 100px;
   width: 100%;
-  transition: all 250ms ease-in-out;
-
-  &.shrink {
-    height: 50px;
-  }
 
   .left {
     display: flex;

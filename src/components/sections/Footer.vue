@@ -64,6 +64,7 @@ import {InputType} from "@/components/InputFieldConfig.ts";
 import DynamicButton from "@/components/DynamicButton.vue";
 import {useI18n} from "vue-i18n";
 import emailjs from '@emailjs/browser';
+import {addToast} from "@/utils/useToast.ts";
 
 interface Social {
   href: string,
@@ -135,12 +136,14 @@ async function send() {
     email.value = "";
     phone.value = "";
     message.value = "";
-  } catch (error) {
-  }
+    addToast('success', 'Message was sent successfully')
 
+  } catch (error) {
+    console.error(error)
+    addToast('error', 'Failed to send message')
+  }
   isLoading.value = false;
 }
-
 
 </script>
 
@@ -204,12 +207,12 @@ async function send() {
           img {
             width: 50px;
             height: 50px;
-            transition: all 250ms ease-in-out;
+            transition: all 100ms ease-in-out;
           }
 
           &:hover {
             img {
-              transform: scale(1.15);
+              transform: scale(1.10);
             }
           }
         }
