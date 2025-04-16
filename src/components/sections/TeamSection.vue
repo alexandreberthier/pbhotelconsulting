@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
 
 const members: Ref<Member[]> = ref([
   {
-    image: 'img_team_1.jpg',
+    image: 'img_team_1.jpeg',
     name: 'memberName1',
     position: 'memberPosition1',
     desc: 'memberDesc1'
