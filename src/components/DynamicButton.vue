@@ -1,25 +1,24 @@
 <template>
-  <div
-      tabindex="0"
-      role="button"
-      :class="['button', {'block': isLoading}]"
+  <button
+      :type="buttonType"
+      :class="['button', { block: isLoading }]"
+      :disabled="isLoading"
+      :aria-label="isLoading ? t('a11y.sendingMessage') : t('a11y.sendMessage')"
   >
-    <div v-if="isLoading" class="loader"></div>
+    <div v-if="isLoading" class="loader" aria-hidden="true"></div>
     <p v-else>{{ t('send') }}</p>
-
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">
+import {useI18n} from 'vue-i18n'
 
-import {useI18n} from "vue-i18n";
-
-const {isLoading} = defineProps<{
+const {isLoading, buttonType = 'button'} = defineProps<{
   isLoading: boolean
+  buttonType?: 'button' | 'submit'
 }>()
 
 const {t} = useI18n()
-
 </script>
 
 <style scoped>
@@ -32,23 +31,21 @@ const {t} = useI18n()
   border-radius: 4px;
   height: 50px;
   cursor: pointer;
+  border: none;
   transition: all 250ms ease-in-out;
 
-  &:focus {
+  &:focus-visible {
     outline: 2px solid var(--darkgray);
+    outline-offset: 2px;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.8;
   }
 
-  &:active {
+  &:disabled {
     opacity: 0.8;
-  }
-
-  &.block {
-    user-select: none;
-    pointer-events: none;
+    cursor: not-allowed;
   }
 
   p {
@@ -74,6 +71,4 @@ const {t} = useI18n()
     transform: rotate(180deg);
   }
 }
-
-
 </style>

@@ -1,0 +1,5 @@
+# Netlify: serve prerendered locale pages and SPA fallback
+/en    /en/index.html   200
+/fr    /fr/index.html   200
+/es    /es/index.html   200
+/*     /index.html       200

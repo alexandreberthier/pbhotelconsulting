@@ -27,6 +27,9 @@ import TeamSection from "@/components/sections/TeamSection.vue";
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
   gap: 90px;
 }
 

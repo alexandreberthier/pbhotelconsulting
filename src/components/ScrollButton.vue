@@ -1,38 +1,39 @@
 <template>
-  <div
+  <button
       v-show="showButton"
-      role="button"
-      aria-label="Scroll to top"
+      type="button"
+      :aria-label="t('a11y.scrollToTop')"
       class="scroll-btn"
       @click="scrollToTop"
   >
-    <img :src="getImage('ic_chevron_white.png')" alt="">
-  </div>
+    <img :src="getImage('ic_chevron_white.png')" alt="" aria-hidden="true">
+  </button>
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted, onUnmounted, type Ref} from "vue";
-import {getImage} from "@/utils/ImageUtils.ts";
+import {onMounted, onUnmounted, ref, type Ref} from 'vue'
+import {getImage} from '@/utils/ImageUtils.ts'
+import {useI18n} from 'vue-i18n'
 
-const showButton: Ref<boolean> = ref(false);
+const {t} = useI18n()
+const showButton: Ref<boolean> = ref(false)
 
 function checkScroll() {
-  const scrollPosition = window.scrollY;
-  const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-  showButton.value = scrollPosition > totalHeight * 0.4;
+  const scrollPosition = window.scrollY
+  const totalHeight = document.documentElement.scrollHeight - window.innerHeight
+  showButton.value = scrollPosition > totalHeight * 0.4
 }
 
 function scrollToTop() {
-  window.scrollTo({top: 0, behavior: "smooth"})
+  window.scrollTo({top: 0, behavior: 'smooth'})
 }
 
 onMounted(() => {
-  window.addEventListener("scroll", checkScroll)
+  window.addEventListener('scroll', checkScroll)
 })
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", checkScroll)
+  window.removeEventListener('scroll', checkScroll)
 })
 </script>
 
@@ -46,21 +47,25 @@ onUnmounted(() => {
   background: var(--darkblue);
   position: fixed;
   bottom: 30%;
-  right: 30px;;
+  right: 30px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 24px;
+  border: none;
   transition: all 250ms ease-in-out;
   z-index: 10;
-
 
   img {
     width: 24px;
     height: 24px;
   }
-}
 
-.scroll-btn:hover {
-  opacity: 0.8;
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+  }
 }
 </style>

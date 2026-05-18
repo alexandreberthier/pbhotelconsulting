@@ -5,8 +5,8 @@
         <div class="top">
           <div class="left">
             <h2>{{ t('getInTouch') }}</h2>
-            <a class="mail" href="mailto:doctor@pbhotelconsulting.com" target="_blank">
-              <p>doctor@pbhotelconsulting.com</p>
+            <a class="mail" href="mailto:doctor@pbhotelconsulting.com">
+              doctor@pbhotelconsulting.com
             </a>
           </div>
           <div class="socials">
@@ -16,13 +16,14 @@
                 :key="index"
                 :href="social.href"
                 target="_blank"
+                rel="noopener noreferrer"
                 :aria-label="social.name"
             >
               <img :src="getImage(social.image)" :alt="social.name">
             </a>
           </div>
         </div>
-        <div class="form-wrapper">
+        <form class="form-wrapper" @submit.prevent="send" novalidate>
           <div class="form">
             <InputField
                 ref="nameRef"
@@ -49,8 +50,8 @@
                 v-model:input="message"
             />
           </div>
-          <DynamicButton :is-loading="isLoading" @click="send"/>
-        </div>
+          <DynamicButton :is-loading="isLoading" button-type="submit"/>
+        </form>
       </div>
     </SectionLayout>
   </div>
@@ -64,8 +65,9 @@ import InputField from "@/components/InputField.vue";
 import {InputType} from "@/components/InputFieldConfig.ts";
 import DynamicButton from "@/components/DynamicButton.vue";
 import {useI18n} from "vue-i18n";
-import emailjs from '@emailjs/browser';
 import {addToast} from "@/utils/useToast.ts";
+
+const WEB3FORMS_SUBMIT_URL = 'https://api.web3forms.com/submit';
 
 interface Social {
   href: string,
@@ -122,29 +124,39 @@ async function send() {
   }
 
   try {
-    await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          user_name: name.value,
-          user_company: company.value,
-          user_email: email.value,
-          user_phone: phone.value,
-          message: message.value,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
+    const response = await fetch(WEB3FORMS_SUBMIT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+        company: company.value,
+        message: message.value,
+        subject: 'New contact from PB Hotel Consulting',
+        botcheck: '',
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message ?? 'Failed to send message');
+    }
 
     name.value = "";
     company.value = "";
     email.value = "";
     phone.value = "";
     message.value = "";
-    addToast('success', 'Message was sent successfully')
-
+    addToast('success', t('toast.formSuccess'));
   } catch (error) {
-    console.error(error)
-    addToast('error', 'Failed to send message')
+    console.error(error);
+    addToast('error', t('toast.formError'));
   }
   isLoading.value = false;
 }
@@ -155,7 +167,7 @@ async function send() {
 
 .footer-wrapper {
   width: 100%;
-  background: var(--lightgray);
+  background: var(--bg-surface);
   display: flex;
   justify-content: center;
   align-items: center;

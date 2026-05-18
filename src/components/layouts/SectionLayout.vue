@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-    <h2 v-if="heading">{{heading}}</h2>
+    <h2 v-if="heading" class="section-heading">{{ heading }}</h2>
     <slot></slot>
   </section>
 </template>
@@ -16,7 +16,9 @@ const {heading} = defineProps<{
 <style scoped>
 
 .content {
-  width: calc(100% - 54px);
+  width: min(calc(100% - 54px), 100%);
+  max-width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;

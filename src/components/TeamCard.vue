@@ -1,62 +1,65 @@
 <template>
-  <div
-      role="button"
-      tabindex="0"
-      @keydown.enter="$emit('flip')"
+  <button
+      type="button"
       class="card-wrapper"
+      :aria-expanded="isFlipped"
+      :aria-label="isFlipped ? t('a11y.hideMemberDetails') : t('a11y.showMemberDetails')"
       @click="$emit('flip')"
   >
-    <div
-        :class="['card-inner', {'rotate': isFlipped}]">
+    <div :class="['card-inner', { rotate: isFlipped }]">
       <div class="front">
         <div class="image-wrapper">
           <img aria-hidden="true" :src="getImage(member.image)" alt="">
         </div>
-        <h3>{{t(member.name)}}</h3>
-        <p>{{t(member.position)}}</p>
-        <img class="click" :src="getImage('ic_click.png')" alt="click card to see more infos">
+        <h3>{{ t(member.name) }}</h3>
+        <p>{{ t(member.position) }}</p>
+        <img class="click" aria-hidden="true" :src="getImage('ic_click.png')" alt="">
       </div>
-      <div :aria-hidden="!isFlipped" class="back">
-        <p> {{t(member.desc)}}</p>
+      <div :hidden="!isFlipped" class="back">
+        <p>{{ t(member.desc) }}</p>
       </div>
     </div>
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">
-
-import {getImage} from "@/utils/ImageUtils.ts";
-import {useI18n} from "vue-i18n";
-const{t} = useI18n()
+import {getImage} from '@/utils/ImageUtils.ts'
+import {useI18n} from 'vue-i18n'
 
 export interface Member {
-  image: string,
-  name: string,
-  position: string,
-  desc: string,
+  image: string
+  name: string
+  position: string
+  desc: string
 }
 
-const {member} = defineProps<{
-  member: Member,
+defineProps<{
+  member: Member
   isFlipped: boolean
 }>()
 
+defineEmits<{
+  flip: []
+}>()
+
+const {t} = useI18n()
 </script>
 
 <style scoped>
-
 .card-wrapper {
   border-radius: 4px;
   flex: 1 1 320px;
   cursor: pointer;
   border: none;
   height: 430px;
+  background: transparent;
+  padding: 0;
+  text-align: inherit;
 
-  &:focus {
+  &:focus-visible {
     outline: 2px solid var(--darkblue);
+    outline-offset: 2px;
   }
-
-
 
   .card-inner {
     position: relative;
@@ -81,8 +84,7 @@ const {member} = defineProps<{
       gap: 32px;
       padding: 30px;
       backface-visibility: hidden;
-      background: linear-gradient(145deg, #fff, #f8f9fa);
-
+      background: linear-gradient(145deg, var(--bg-card-start), var(--bg-card-end));
     }
 
     .front {
@@ -114,5 +116,4 @@ const {member} = defineProps<{
     }
   }
 }
-
 </style>

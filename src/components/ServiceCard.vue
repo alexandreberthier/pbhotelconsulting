@@ -1,10 +1,11 @@
 <template>
-  <div
-      role="button"
-      tabindex="0"
+  <button
+      type="button"
       @click="$emit('toggle')"
       :aria-expanded="isOpen"
-      class="card-wrapper">
+      :aria-label="isOpen ? t('a11y.collapseService') : t('a11y.expandService')"
+      class="card-wrapper"
+  >
     <div class="visible">
       <div class="icon-wrapper">
         <img aria-hidden="true" :src="getImage(service.image)" alt="">
@@ -12,53 +13,57 @@
       <h3>{{ t(service.title) }}</h3>
       <p>{{ t(service.subHeader) }}</p>
     </div>
-    <p
-        :class="['hidden', {'grow': isOpen}]">{{t(service.info) }}
-    </p>
-    <div class="chevron-wrapper">
-      <img :class="{'rotate': isOpen}" :src="getImage('ic_chevron.png')" alt="Toggle additional information">
+    <p :id="detailsId" :class="['hidden', { grow: isOpen }]">{{ t(service.info) }}</p>
+    <div class="chevron-wrapper" aria-hidden="true">
+      <img :class="{ rotate: isOpen }" :src="getImage('ic_chevron.png')" alt="">
     </div>
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">
-
-import {getImage} from "@/utils/ImageUtils.ts";
-import {useI18n} from "vue-i18n";
+import {computed} from 'vue'
+import {getImage} from '@/utils/ImageUtils.ts'
+import {useI18n} from 'vue-i18n'
 
 export interface Service {
-  id: number,
-  image: string,
-  title: string,
-  subHeader: string,
+  id: number
+  image: string
+  title: string
+  subHeader: string
   info: string
 }
 
 const {service, isOpen} = defineProps<{
-  service: Service,
+  service: Service
   isOpen: boolean
 }>()
 
-const {t} = useI18n();
+defineEmits<{
+  toggle: []
+}>()
+
+const {t} = useI18n()
+const detailsId = computed(() => `service-details-${service.id}`)
 </script>
 
 <style scoped>
-
 .card-wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: linear-gradient(145deg, #fff, #f8f9fa);
+  background: linear-gradient(145deg, var(--bg-card-start), var(--bg-card-end));
   border-radius: 4px;
   box-shadow: 0 6px 15px rgba(63, 81, 181, 0.25);
   flex: 1 1 340px;
   cursor: pointer;
   padding: 30px;
   border: none;
+  text-align: inherit;
   transition: all 100ms ease-in-out;
 
-  &:focus {
+  &:focus-visible {
     outline: 2px solid var(--darkblue);
+    outline-offset: 2px;
   }
 
   .visible {
@@ -67,7 +72,6 @@ const {t} = useI18n();
     align-items: center;
     gap: 16px;
     text-align: center;
-
 
     h3 {
       min-height: 85px;
@@ -97,7 +101,7 @@ const {t} = useI18n();
     img {
       width: 32px;
       height: 32px;
-      transition:  all 250ms ease-in-out;
+      transition: all 250ms ease-in-out;
 
       &.rotate {
         transform: rotate(180deg);
@@ -124,5 +128,4 @@ const {t} = useI18n();
     max-width: 396px;
   }
 }
-
 </style>

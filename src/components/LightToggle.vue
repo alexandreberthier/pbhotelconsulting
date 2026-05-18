@@ -1,86 +1,74 @@
 <template>
-  <div
-      tabindex="0"
+  <button
+      type="button"
       role="switch"
       :aria-checked="globalStore.isDarkMode"
-      aria-label="Toggle darkMode"
-      @keydown.enter="globalStore.toggleDarkMode()"
+      :aria-label="t('a11y.toggleDarkMode')"
       @click="globalStore.toggleDarkMode()"
       :class="['toggle-wrapper', { toggled: globalStore.isDarkMode }]"
   >
-    <div class="circle">
+    <span class="circle" aria-hidden="true">
       <img
-          aria-hidden="true"
           :src="getImage(globalStore.isDarkMode ? 'ic_moon.png' : 'ic_sun.png')"
           alt=""
-      />
-    </div>
-  </div>
+      >
+    </span>
+  </button>
 </template>
 
 <script setup lang="ts">
-import {getImage} from "@/utils/ImageUtils.ts";
-import {useGlobalStore} from "@/stores/globalStore.ts";
+import {getImage} from '@/utils/ImageUtils.ts'
+import {useGlobalStore} from '@/stores/globalStore.ts'
+import {useI18n} from 'vue-i18n'
 
 const globalStore = useGlobalStore()
-
+const {t} = useI18n()
 </script>
 
 <style scoped>
 .toggle-wrapper {
   display: flex;
   align-items: center;
-  justify-content: start;
-  background: var(--white);
+  justify-content: flex-start;
   height: 40px;
-  width: fit-content;
+  width: 56px;
+  min-width: 56px;
   border-radius: 24px;
   padding: 5px;
   cursor: pointer;
-  transition: all 100ms ease-in-out;
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
-  background: var(--lightgray);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  transition: all 150ms ease-in-out;
+  flex-shrink: 0;
 
-  &:focus {
+  &:focus-visible {
     outline: 2px solid var(--pink);
+    outline-offset: 2px;
   }
 
   .circle {
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    background: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2px;
-    background: linear-gradient(
-        to top,
-        var(--orange) 0%,
-        #ffffff 90%
-    );
+    background: linear-gradient(to top, var(--orange) 0%, var(--bg-elevated) 90%);
+    transition: transform 150ms ease-in-out;
 
     img {
-      width: 25px;
-      height: 25px;
+      width: 22px;
+      height: 22px;
     }
   }
 
   &.toggled {
-    justify-content: end;
-    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+    justify-content: flex-end;
     background: #333;
-    opacity: 0.7;
 
     .circle {
-      background: linear-gradient(
-          to top,
-          #555 0%,
-          #bbb 90%
-      );
+      background: linear-gradient(to top, #555 0%, #bbb 90%);
     }
   }
 }
-
-
 </style>

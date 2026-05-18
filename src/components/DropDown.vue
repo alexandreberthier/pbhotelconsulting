@@ -3,11 +3,11 @@
       role="combobox"
       :aria-expanded="showOptions"
       aria-haspopup="listbox"
-      aria-label="Select language"
+      :aria-label="t('a11y.selectLanguage')"
       tabindex="0"
       ref="dropdown"
       @keydown="handleKeyDown"
-      class="drop-wrapper">
+      :class="['drop-wrapper', { compact, 'drop-wrapper--up': dropUp }]">
     <div
 
         @click="toggleOptions"
@@ -50,8 +50,10 @@ export interface Option<T> {
   value: T
 }
 
-const {options} = defineProps<{
+const {options, compact = false, dropUp = false} = defineProps<{
   options: Option<T>[]
+  compact?: boolean
+  dropUp?: boolean
 }>()
 
 const {t} = useI18n()
@@ -145,7 +147,7 @@ onUnmounted(() => {
   position: relative;
   padding: 0 10px;
   border-radius: 4px;
-  border: 1px solid var(--gray);
+  border: 1px solid var(--border-color);
 
   &:focus {
     outline: 2px solid var(--pink);
@@ -157,7 +159,7 @@ onUnmounted(() => {
     align-items: center;
     gap: 10px;
     height: 48px;
-    background: var(--white);
+    background: var(--bg-elevated);
 
     .icon-wrapper {
       display: flex;
@@ -173,26 +175,62 @@ onUnmounted(() => {
 
   .hidden {
     position: absolute;
-    top: 110%;
+    top: calc(100% + 6px);
     left: -1px;
-    border: 1px solid var(--gray);
+    right: -1px;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    width: 100%;
+    width: auto;
+    min-width: 100%;
     padding: 6px;
-    background: var(--white);
+    background: var(--bg-elevated);
     display: flex;
     flex-direction: column;
     gap: 8px;
+    z-index: 50;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 
     .option {
+      margin: 0;
+      padding: 8px 10px;
+      border-radius: 4px;
+
       &.selected {
-        background: var(--lightgray);
+        background: var(--bg-surface);
       }
 
       &:hover {
-        background: var(--lightgray);
+        background: var(--bg-surface);
       }
     }
+  }
+
+  &.compact {
+    flex-shrink: 0;
+    width: auto;
+    padding: 0 8px;
+
+    .visible {
+      height: 40px;
+      gap: 6px;
+      padding: 0 4px;
+
+      p {
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+  }
+
+  &.drop-wrapper--up .hidden {
+    top: auto;
+    bottom: calc(100% + 6px);
   }
 }
 

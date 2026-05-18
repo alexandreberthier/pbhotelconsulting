@@ -1,9 +1,14 @@
 <template>
   <SectionLayout :heading="t('ourClients')">
-    <div role="marquee" class="logo-carousel">
+    <div
+        ref="marqueeRef"
+        class="logo-carousel reveal reveal--up"
+        :class="{ 'is-visible': isVisible }"
+        :aria-label="t('a11y.clientLogos')"
+    >
       <div class="logo-container">
         <div v-for="(client, index) in allClients" :key="index" class="logo-item">
-          <img :src="getImage(client)" :alt="`Client logo ${index + 1}`">
+          <img :src="getImage(client)" :alt="`Client logo ${(index % clients.length) + 1}`">
         </div>
       </div>
     </div>
@@ -11,12 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import SectionLayout from "@/components/layouts/SectionLayout.vue";
-import {computed } from "vue";
-import { getImage } from "@/utils/ImageUtils.ts";
-import {useI18n} from "vue-i18n";
+import SectionLayout from '@/components/layouts/SectionLayout.vue'
+import {computed, useTemplateRef} from 'vue'
+import {getImage} from '@/utils/ImageUtils.ts'
+import {useI18n} from 'vue-i18n'
+import {useScrollReveal} from '@/composables/useScrollReveal'
 
 const {t} = useI18n()
+const marqueeRef = useTemplateRef<HTMLElement>('marqueeRef')
+const {isVisible} = useScrollReveal(marqueeRef, {threshold: 0.1})
 
 const clients = [
   'ic_blue.jpeg',
@@ -30,15 +38,16 @@ const clients = [
   'ic_fuji.png',
   'ic_cordonbleu.jpg',
   'ic_caravedo.png',
-  'ic_arte.jpg'
-];
+  'ic_arte.jpg',
+]
 
-const allClients = computed(() => [...clients, ...clients, ...clients]);
+const allClients = computed(() => [...clients, ...clients, ...clients])
 </script>
 
 <style scoped>
 .logo-carousel {
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
   position: relative;
 }
@@ -57,11 +66,10 @@ const allClients = computed(() => [...clients, ...clients, ...clients]);
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-
 }
 
 .logo-item img {
-  width: 150px;
+  width: min(150px, 28vw);
   height: auto;
 }
 
@@ -74,5 +82,12 @@ const allClients = computed(() => [...clients, ...clients, ...clients]);
   }
 }
 
-
+@media (prefers-reduced-motion: reduce) {
+  .logo-container {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}
 </style>

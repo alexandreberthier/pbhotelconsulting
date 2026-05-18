@@ -2,33 +2,41 @@
   <div class="inp-outer-wrapper">
     <div class="inp">
       <label :for="id">{{ t(computedConfig.label) }}</label>
-      <textarea v-if="computedConfig.type === 'textarea'"
+      <textarea
+          v-if="computedConfig.type === 'textarea'"
           v-model="input"
           :name="computedConfig.label"
-          :placeholder="computedConfig.placeholder"
+          :placeholder="t(computedConfig.label)"
           :id="id"
+          :autocomplete="computedConfig.autocomplete"
+          :aria-invalid="!!error"
+          :aria-describedby="error ? errorId : undefined"
+          :required="!!computedConfig.validate"
           cols="30"
-          rows="10">
-
-      </textarea>
-      <input v-else
+          rows="10"
+      />
+      <input
+          v-else
           v-model="input"
           :type="computedConfig.type"
           :name="computedConfig.label"
-          :placeholder="computedConfig.placeholder"
+          :placeholder="t(computedConfig.label)"
           :id="id"
+          :autocomplete="computedConfig.autocomplete"
+          :aria-invalid="!!error"
+          :aria-describedby="error ? errorId : undefined"
+          :required="!!computedConfig.validate"
       >
       <div class="line"></div>
     </div>
-    <p v-if="error" class="error">{{ error }}</p>
+    <p v-if="error" :id="errorId" class="error" role="alert">{{ error }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed, type ComputedRef, type ModelRef, watch} from "vue";
-
-import {type Config, inputConfig, InputType} from "@/components/InputFieldConfig.ts"
-import {useI18n} from "vue-i18n";
+import {computed, type ComputedRef, type ModelRef, watch} from 'vue'
+import {type Config, inputConfig, InputType} from '@/components/InputFieldConfig.ts'
+import {useI18n} from 'vue-i18n'
 
 const input: ModelRef<string | undefined> = defineModel('input')
 const error: ModelRef<string | undefined> = defineModel('error')
@@ -39,34 +47,29 @@ const {inputType} = defineProps<{
 
 const {t} = useI18n()
 
-
 const computedConfig: ComputedRef<Config> = computed(() => inputConfig.value[inputType])
-
 const id = computed(() => `${computedConfig.value.label}-id`)
+const errorId = computed(() => `${id.value}-error`)
 
 function validateField() {
   if (!computedConfig.value.validate) return
 
-  let userInput = input.value?.trim() || ''
-
+  const userInput = input.value?.trim() || ''
   error.value = computedConfig.value.validate(userInput) ? undefined : computedConfig.value.error
 }
 
 watch(input, (newValue) => {
   if (!newValue?.trim()) {
-    error.value = undefined;
+    error.value = undefined
   } else {
     validateField()
   }
 })
 
 defineExpose({validateField})
-
-
 </script>
 
 <style scoped>
-
 .inp-outer-wrapper {
   display: flex;
   flex-direction: column;
@@ -119,7 +122,7 @@ defineExpose({validateField})
 
     &:hover {
       .line {
-        &:after  {
+        &:after {
           width: 100%;
         }
       }
@@ -144,7 +147,6 @@ defineExpose({validateField})
     }
   }
 
-
   .error {
     font-size: 16px;
     color: red;
@@ -160,5 +162,4 @@ defineExpose({validateField})
     flex: 1 1 500px;
   }
 }
-
 </style>

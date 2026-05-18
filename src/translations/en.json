@@ -1,4 +1,35 @@
 {
+  "seo": {
+    "title": "PB Hotel Consulting – Global Hospitality Strategy & Development",
+    "description": "PB Hotel Consulting offers over 35 years of international experience in hotel management, development, marketing, and recruitment for hotels, resorts, and tourism projects.",
+    "jsonLdDescription": "PB Hotel Consulting offers over 35 years of international experience in hotel management, development, marketing, and recruitment."
+  },
+
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "mainNavigation": "Main navigation",
+    "toggleNavigation": "Open navigation menu",
+    "closeNavigation": "Close navigation menu",
+    "logoHome": "PB Hotel Consulting – back to home",
+    "selectLanguage": "Select language",
+    "scrollToTop": "Scroll to top",
+    "expandService": "Show more details",
+    "collapseService": "Hide details",
+    "showMemberDetails": "Show team member details",
+    "hideMemberDetails": "Hide team member details",
+    "testimonialSlide": "Go to testimonial {n} of {total}",
+    "clientLogos": "Client logos",
+    "aboutImage": "Hotel consulting team illustration",
+    "sendMessage": "Send message",
+    "sendingMessage": "Sending message",
+    "closeNotification": "Close notification",
+    "toggleDarkMode": "Toggle dark mode"
+  },
+
+  "toast": {
+    "formSuccess": "Message sent successfully",
+    "formError": "Failed to send message"
+  },
 
   "about": "About",
   "contact": "Contact",
