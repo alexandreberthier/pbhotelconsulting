@@ -1,44 +1,57 @@
 <template>
   <SectionLayout :heading="t('ourClients')">
-    <div
-        ref="marqueeRef"
-        class="logo-carousel reveal reveal--up"
-        :class="{ 'is-visible': isVisible }"
+    <Reveal
+        class="logo-carousel"
+        direction="up"
+        :threshold="0.1"
+        role="region"
         :aria-label="t('a11y.clientLogos')"
     >
-      <div class="logo-container">
+      <ul class="sr-only">
+        <li v-for="client in clients" :key="client.file">{{ client.name }}</li>
+      </ul>
+      <div
+          class="logo-container"
+          aria-hidden="true"
+          :class="{ 'logo-container--static': prefersReducedMotion }"
+      >
         <div v-for="(client, index) in allClients" :key="index" class="logo-item">
-          <img :src="getImage(client)" :alt="`Client logo ${(index % clients.length) + 1}`">
+          <img :src="getImage(client.file)" alt="">
         </div>
       </div>
-    </div>
+    </Reveal>
   </SectionLayout>
 </template>
 
 <script setup lang="ts">
 import SectionLayout from '@/components/layouts/SectionLayout.vue'
-import {computed, useTemplateRef} from 'vue'
+import Reveal from '@/components/Reveal.vue'
+import {computed} from 'vue'
 import {getImage} from '@/utils/ImageUtils.ts'
 import {useI18n} from 'vue-i18n'
-import {useScrollReveal} from '@/composables/useScrollReveal'
+import {useReducedMotion} from '@/composables/useReducedMotion'
+
+interface Client {
+  file: string
+  name: string
+}
 
 const {t} = useI18n()
-const marqueeRef = useTemplateRef<HTMLElement>('marqueeRef')
-const {isVisible} = useScrollReveal(marqueeRef, {threshold: 0.1})
+const prefersReducedMotion = useReducedMotion()
 
-const clients = [
-  'ic_blue.jpeg',
-  'ic_hilton.jpeg',
-  'ic_melia.jpeg',
-  'ic_suneo.jpeg',
-  'ic_thunderbird.jpg',
-  'ic_playatortuga.png',
-  'ic_lefoyer.png',
-  'ic_intercontinental.png',
-  'ic_fuji.png',
-  'ic_cordonbleu.jpg',
-  'ic_caravedo.png',
-  'ic_arte.jpg',
+const clients: Client[] = [
+  {file: 'ic_blue.jpeg', name: 'Blue'},
+  {file: 'ic_hilton.jpeg', name: 'Hilton'},
+  {file: 'ic_melia.jpeg', name: 'Meliá'},
+  {file: 'ic_suneo.jpeg', name: 'Suneo'},
+  {file: 'ic_thunderbird.jpg', name: 'Thunderbird'},
+  {file: 'ic_playatortuga.png', name: 'Playa Tortuga'},
+  {file: 'ic_lefoyer.png', name: 'Le Foyer'},
+  {file: 'ic_intercontinental.png', name: 'InterContinental'},
+  {file: 'ic_fuji.png', name: 'Fuji'},
+  {file: 'ic_cordonbleu.jpg', name: 'Le Cordon Bleu'},
+  {file: 'ic_caravedo.png', name: 'Caravedo'},
+  {file: 'ic_arte.jpg', name: 'Arte'},
 ]
 
 const allClients = computed(() => [...clients, ...clients, ...clients])
@@ -59,6 +72,19 @@ const allClients = computed(() => [...clients, ...clients, ...clients])
   animation: scroll 25s linear infinite;
   width: max-content;
   will-change: transform;
+}
+
+.logo-carousel:hover .logo-container,
+.logo-carousel:focus-within .logo-container {
+  animation-play-state: paused;
+}
+
+.logo-container--static {
+  animation: none;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  will-change: auto;
 }
 
 .logo-item {
@@ -88,6 +114,7 @@ const allClients = computed(() => [...clients, ...clients, ...clients])
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
+    will-change: auto;
   }
 }
 </style>

@@ -44,7 +44,7 @@ onUnmounted(() => {
   align-items: center;
   width: 70px;
   height: 70px;
-  background: var(--darkblue);
+  background: var(--cta-bg);
   position: fixed;
   bottom: 30%;
   right: 30px;

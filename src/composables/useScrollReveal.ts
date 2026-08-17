@@ -1,14 +1,18 @@
-import {onBeforeUnmount, onMounted, type Ref, ref} from 'vue'
+import {onBeforeUnmount, onMounted, type Ref, ref, watch} from 'vue'
 import {useReducedMotion} from '@/composables/useReducedMotion'
 
-interface ScrollRevealOptions {
+export interface ScrollRevealOptions {
   threshold?: number
   rootMargin?: string
   triggerOnce?: boolean
 }
 
+function canObserve(): boolean {
+  return typeof window !== 'undefined' && 'IntersectionObserver' in window
+}
+
 export function useScrollReveal(
-  targetRef: Ref<HTMLElement | null>,
+  targetRef: Ref<HTMLElement | null | undefined>,
   options: ScrollRevealOptions = {},
 ) {
   const {
@@ -20,9 +24,35 @@ export function useScrollReveal(
   const isVisible = ref(false)
   const prefersReducedMotion = useReducedMotion()
   let observer: IntersectionObserver | null = null
+  let boundEl: HTMLElement | null = null
 
-  onMounted(() => {
-    if (prefersReducedMotion.value) {
+  function show() {
+    isVisible.value = true
+    if (triggerOnce) {
+      teardownObserver()
+    }
+  }
+
+  function teardownObserver() {
+    observer?.disconnect()
+    observer = null
+  }
+
+  function unbind() {
+    teardownObserver()
+    boundEl?.removeEventListener('focusin', show)
+    boundEl = null
+  }
+
+  function bind(el: HTMLElement | null | undefined) {
+    unbind()
+
+    if (!el) return
+
+    boundEl = el
+    el.addEventListener('focusin', show)
+
+    if (prefersReducedMotion.value || !canObserve()) {
       isVisible.value = true
       return
     }
@@ -30,24 +60,32 @@ export function useScrollReveal(
     observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-          isVisible.value = true
-          if (triggerOnce) {
-            observer?.unobserve(entry.target)
+          if (entry.isIntersecting) {
+            show()
+            return
+          }
+
+          if (!triggerOnce) {
+            isVisible.value = false
           }
         })
       },
       {threshold, rootMargin},
     )
 
-    if (targetRef.value) {
-      observer.observe(targetRef.value)
-    }
+    observer.observe(el)
+  }
+
+  onMounted(() => {
+    watch(
+      [targetRef, prefersReducedMotion],
+      () => bind(targetRef.value),
+      {immediate: true, flush: 'post'},
+    )
   })
 
   onBeforeUnmount(() => {
-    observer?.disconnect()
-    observer = null
+    unbind()
   })
 
   return {isVisible, prefersReducedMotion}

@@ -53,7 +53,7 @@ const detailsId = computed(() => `service-details-${service.id}`)
   gap: 16px;
   background: linear-gradient(145deg, var(--bg-card-start), var(--bg-card-end));
   border-radius: 4px;
-  box-shadow: 0 6px 15px rgba(63, 81, 181, 0.25);
+  box-shadow: 0 6px 15px var(--brand-shadow);
   flex: 1 1 340px;
   cursor: pointer;
   padding: 30px;

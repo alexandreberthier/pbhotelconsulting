@@ -1,156 +1,174 @@
 <template>
-  <section ref="heroRef" class="hero" :class="{ 'hero--ready': isReady }">
-    <div
-        class="hero-media"
-        :style="mediaStyle"
-        aria-hidden="true"
-    />
-    <div class="hero-overlay" :style="overlayStyle" aria-hidden="true"/>
-    <div class="hero-content" :style="contentStyle">
-      <h1>{{ t('heroText') }}</h1>
+  <section class="hero" :aria-labelledby="headingId">
+    <div class="hero-inner">
+      <Reveal class="hero-copy" direction="up">
+        <p class="hero-kicker">{{ t('heroKicker') }}</p>
+        <h1 :id="headingId">{{ t('heroText') }}</h1>
+        <p class="hero-lead">{{ t('heroSubText') }}</p>
+        <router-link
+            class="hero-cta"
+            :to="{ name: 'home', params: { locale: currentLocale }, hash: '#contact' }"
+        >
+          {{ t('getInTouch') }}
+        </router-link>
+      </Reveal>
+      <Reveal class="hero-visual" direction="up" :delay="140">
+        <div class="hero-visual-frame">
+          <img
+              :src="getImage('ic_hero.jpg')"
+              :alt="t('a11y.heroImage')"
+          >
+        </div>
+      </Reveal>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, onUnmounted, ref, useTemplateRef} from 'vue'
+import {useId} from 'vue'
+import Reveal from '@/components/Reveal.vue'
 import {getImage} from '@/utils/ImageUtils.ts'
 import {useI18n} from 'vue-i18n'
-import {useReducedMotion} from '@/composables/useReducedMotion'
+import {useAppLocale} from '@/composables/useAppLocale'
 
 const {t} = useI18n()
-const prefersReducedMotion = useReducedMotion()
-const heroRef = useTemplateRef<HTMLElement>('heroRef')
-const isReady = ref(false)
-const scrollY = ref(0)
-const isTicking = ref(false)
-
-const bgImage = computed(() => `url('${getImage('ic_hero_reception.jpg')}')`)
-
-const heroProgress = computed(() => {
-  if (!heroRef.value || prefersReducedMotion.value) return 0
-  const height = heroRef.value.offsetHeight || window.innerHeight
-  return Math.min(scrollY.value / height, 1)
-})
-
-const mediaStyle = computed(() => {
-  if (prefersReducedMotion.value) {
-    return {backgroundImage: bgImage.value}
-  }
-
-  const offset = scrollY.value * 0.42
-  return {
-    backgroundImage: bgImage.value,
-    transform: `translate3d(0, ${offset}px, 0) scale(1.05)`,
-  }
-})
-
-const contentStyle = computed(() => {
-  if (prefersReducedMotion.value) return {}
-
-  const offset = scrollY.value * 0.18
-  const opacity = Math.max(1 - heroProgress.value * 1.15, 0)
-
-  return {
-    transform: `translate3d(0, ${-offset}px, 0)`,
-    opacity,
-  }
-})
-
-const overlayStyle = computed(() => {
-  if (prefersReducedMotion.value) return {}
-
-  return {
-    background: `rgba(0, 0, 0, ${0.55 + heroProgress.value * 0.2})`,
-  }
-})
-
-function updateScroll() {
-  if (!isTicking.value) {
-    isTicking.value = true
-    requestAnimationFrame(() => {
-      scrollY.value = window.scrollY
-      isTicking.value = false
-    })
-  }
-}
-
-onMounted(() => {
-  scrollY.value = window.scrollY
-  window.addEventListener('scroll', updateScroll, {passive: true})
-  requestAnimationFrame(() => {
-    isReady.value = true
-  })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', updateScroll)
-})
+const {currentLocale} = useAppLocale()
+const headingId = useId()
 </script>
 
 <style scoped>
 .hero {
   width: 100%;
-  height: 100vh;
-  min-height: 520px;
-  position: relative;
-  overflow: hidden;
+  min-height: 100svh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  background: var(--bg-hero);
+  padding: calc(var(--header-height) + 32px) 0 48px;
   isolation: isolate;
 }
 
-.hero-media {
+.hero-inner {
+  width: min(calc(100% - 40px), 1250px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 640px;
+
+  h1 {
+    color: var(--heading);
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+  }
+}
+
+.hero-kicker {
+  margin: 0;
+  color: var(--brand-teal);
+  font-size: clamp(13px, 1.4vw, 15px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-lead {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.5;
+  max-width: 38ch;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 14px 28px;
+  background: var(--cta-bg);
+  color: var(--white);
+  border-radius: 4px;
+  font-size: clamp(16px, 1.6vw, 18px);
+  transition: background 200ms ease-in-out, opacity 200ms ease-in-out;
+
+  &:hover {
+    opacity: 0.88;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-teal);
+    outline-offset: 3px;
+  }
+}
+
+.hero-visual {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+}
+
+.hero-visual-frame {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 18px 40px var(--brand-shadow);
+
+  img {
+    display: block;
+    width: 100%;
+    height: min(42vh, 380px);
+    object-fit: cover;
+    object-position: center 40%;
+  }
+}
+
+.hero-visual::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  will-change: transform;
+  inset: 16px -12px -12px 16px;
+  border: 2px solid var(--brand-teal);
+  border-radius: 10px;
   z-index: 0;
 }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1;
-  transition: background 120ms linear;
-}
+@media (min-width: 740px) {
+  .hero {
+    padding: calc(var(--header-height) + 40px) 0 56px;
+  }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  width: min(90%, 920px);
-  text-align: center;
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
-
-  h1 {
-    color: var(--white);
-    margin: 0;
+  .hero-visual-frame img {
+    height: min(46vh, 440px);
   }
 }
 
-.hero--ready .hero-content {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-media {
-    inset: 0;
-    transform: none !important;
+@media (min-width: 1200px) {
+  .hero-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 72px;
   }
 
-  .hero-content {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .hero-copy {
+    flex: 1 1 48%;
+    gap: 20px;
+  }
+
+  .hero-visual {
+    flex: 1 1 44%;
+    max-width: 560px;
+  }
+
+  .hero-visual-frame img {
+    height: min(62vh, 520px);
   }
 }
 </style>

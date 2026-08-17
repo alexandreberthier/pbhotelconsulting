@@ -57,7 +57,7 @@ import {toasts} from "@/utils/useToast.ts";
     background: linear-gradient(145deg, var(--bg-card-start), var(--bg-card-end));
     width: fit-content;
     height: 60px;
-    box-shadow: 0 6px 15px rgba(63, 81, 181, 0.25);
+    box-shadow: 0 6px 15px var(--brand-shadow);
     border-radius: 4px;
     display: flex;
     position: relative;

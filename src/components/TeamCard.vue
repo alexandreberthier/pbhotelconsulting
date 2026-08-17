@@ -15,8 +15,10 @@
         <p>{{ t(member.position) }}</p>
         <img class="click" aria-hidden="true" :src="getImage('ic_click.png')" alt="">
       </div>
-      <div :hidden="!isFlipped" class="back">
-        <p>{{ t(member.desc) }}</p>
+      <div class="back" :aria-hidden="!isFlipped">
+        <div class="back-scroll">
+          <p>{{ t(member.desc) }}</p>
+        </div>
       </div>
     </div>
   </button>
@@ -49,6 +51,8 @@ const {t} = useI18n()
 .card-wrapper {
   border-radius: 4px;
   flex: 1 1 320px;
+  min-width: 0;
+  max-width: 100%;
   cursor: pointer;
   border: none;
   height: 430px;
@@ -66,8 +70,9 @@ const {t} = useI18n()
     transform-style: preserve-3d;
     width: 100%;
     height: 100%;
-    transition: all 400ms ease-in-out;
-    box-shadow: 0 6px 15px rgba(63, 81, 181, 0.25);
+    border-radius: 4px;
+    transition: transform 400ms ease-in-out;
+    box-shadow: 0 6px 15px var(--brand-shadow);
 
     &.rotate {
       transform: rotateY(180deg);
@@ -75,25 +80,37 @@ const {t} = useI18n()
 
     .front, .back {
       position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-      padding: 30px;
+      min-width: 0;
+      padding: 24px;
       backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       background: linear-gradient(145deg, var(--bg-card-start), var(--bg-card-end));
+      border-radius: 4px;
     }
 
     .front {
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+
+      h3, p {
+        max-width: 100%;
+        overflow-wrap: break-word;
+      }
+
       .image-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 180px;
         height: 180px;
+        flex-shrink: 0;
         border-radius: 50%;
         overflow: hidden;
 
@@ -108,11 +125,28 @@ const {t} = useI18n()
       .click {
         width: 30px;
         height: 30px;
+        flex-shrink: 0;
       }
     }
 
     .back {
       transform: rotateY(180deg);
+      text-align: left;
+
+      .back-scroll {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      p {
+        width: 100%;
+        margin: 0;
+        font-size: clamp(15px, 1.5vw, 17px);
+        line-height: 1.45;
+        overflow-wrap: break-word;
+      }
     }
   }
 }

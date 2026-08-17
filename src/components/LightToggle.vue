@@ -42,7 +42,7 @@ const {t} = useI18n()
   flex-shrink: 0;
 
   &:focus-visible {
-    outline: 2px solid var(--pink);
+    outline: 2px solid var(--brand-teal);
     outline-offset: 2px;
   }
 

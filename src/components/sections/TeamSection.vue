@@ -1,9 +1,11 @@
 <template>
   <SectionLayout :heading="t('team')">
-    <div
-        ref="cardFlex"
-        class="card-flex reveal reveal--right"
-        :class="{ 'is-visible': isVisible }"
+    <Reveal
+        ref="cardReveal"
+        class="card-flex"
+        direction="up"
+        stagger
+        :threshold="0.12"
     >
       <TeamCard
           v-for="(member, index) in members"
@@ -12,30 +14,29 @@
           :member="member"
           :is-flipped="index === activeIndex"
           class="team-card-item"
-          :style="{ transitionDelay: isVisible ? `${index * 90}ms` : '0ms' }"
       />
-    </div>
+    </Reveal>
   </SectionLayout>
 </template>
 
 <script setup lang="ts">
 import SectionLayout from '@/components/layouts/SectionLayout.vue'
+import Reveal from '@/components/Reveal.vue'
 import TeamCard, {type Member} from '@/components/TeamCard.vue'
 import {onMounted, onUnmounted, ref, type Ref, useTemplateRef} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {useScrollReveal} from '@/composables/useScrollReveal'
 
 const {t} = useI18n()
-const cardFlex = useTemplateRef<HTMLDivElement>('cardFlex')
+const cardReveal = useTemplateRef<{ el: HTMLElement | null }>('cardReveal')
 const activeIndex: Ref<number | null> = ref(null)
-const {isVisible} = useScrollReveal(cardFlex, {threshold: 0.12})
 
 function setActiveIndex(index: number) {
   activeIndex.value = activeIndex.value === index ? null : index
 }
 
 function handleClickOutside(event: Event) {
-  if (cardFlex.value && !cardFlex.value.contains(event.target as Node)) {
+  const el = cardReveal.value?.el
+  if (el && !el.contains(event.target as Node)) {
     activeIndex.value = null
   }
 }
@@ -66,31 +67,7 @@ const members: Ref<Member[]> = ref([
   flex-wrap: wrap;
 }
 
-.team-card-item {
-  transition:
-    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 250ms ease-in-out;
-}
-
-.reveal:not(.is-visible) .team-card-item {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.reveal.is-visible .team-card-item {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .team-card-item:hover {
-  box-shadow: 0 6px 50px rgba(63, 81, 181, 0.25);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal:not(.is-visible) .team-card-item {
-    opacity: 1;
-    transform: none;
-  }
+  box-shadow: 0 6px 50px var(--brand-shadow);
 }
 </style>

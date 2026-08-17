@@ -66,7 +66,7 @@ useSeo()
   }
 
   main {
-    margin: 80px 0 0;
+    margin: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -75,12 +75,6 @@ useSeo()
     &:focus {
       outline: none;
     }
-  }
-}
-
-@media (min-width: 1200px) {
-  .app main {
-    margin-top: 100px;
   }
 }
 </style>

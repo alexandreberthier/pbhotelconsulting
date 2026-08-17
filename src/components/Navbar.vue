@@ -109,6 +109,7 @@ watch(showMenu, (isOpen) => {
   gap: 8px;
   padding: 8px 12px;
   background: var(--nav-bg);
+  box-shadow: 0 1px 0 rgba(10, 45, 79, 0.08);
   min-height: 72px;
   width: 100%;
   max-width: 100%;
@@ -121,7 +122,7 @@ watch(showMenu, (isOpen) => {
     z-index: 21;
 
     img {
-      width: clamp(110px, 36vw, 160px);
+      width: clamp(150px, 48vw, 210px);
       height: auto;
       max-width: 100%;
     }
@@ -273,7 +274,7 @@ watch(showMenu, (isOpen) => {
     min-height: 88px;
 
     .left img {
-      width: clamp(140px, 22vw, 200px);
+      width: clamp(180px, 28vw, 240px);
     }
 
     .right .burger-menu {
@@ -293,7 +294,7 @@ watch(showMenu, (isOpen) => {
       flex: 0 0 auto;
 
       img {
-        width: 220px;
+        width: 260px;
       }
     }
 

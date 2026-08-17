@@ -150,7 +150,7 @@ onUnmounted(() => {
   border: 1px solid var(--border-color);
 
   &:focus {
-    outline: 2px solid var(--pink);
+    outline: 2px solid var(--brand-teal);
   }
 
 

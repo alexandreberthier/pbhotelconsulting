@@ -26,7 +26,7 @@ const {t} = useI18n()
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--darkblue);
+  background: var(--cta-bg);
   width: 320px;
   border-radius: 4px;
   height: 50px;

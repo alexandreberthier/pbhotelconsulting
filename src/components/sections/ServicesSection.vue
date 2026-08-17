@@ -1,9 +1,10 @@
 <template>
   <SectionLayout :heading="t('ourServices')">
-    <div
-        ref="servicesContainerRef"
+    <Reveal
         class="services-flex"
-        :class="['reveal', 'reveal--left', { 'is-visible': isVisible }]"
+        direction="up"
+        stagger
+        :threshold="0.12"
     >
       <ServiceCard
           v-for="(service, index) in services"
@@ -12,23 +13,20 @@
           :service="service"
           :is-open="activeIndex === service.id"
           class="service-card-item"
-          :style="{ transitionDelay: isVisible ? `${index * 90}ms` : '0ms' }"
       />
-    </div>
+    </Reveal>
   </SectionLayout>
 </template>
 
 <script setup lang="ts">
 import SectionLayout from '@/components/layouts/SectionLayout.vue'
+import Reveal from '@/components/Reveal.vue'
 import ServiceCard, {type Service} from '@/components/ServiceCard.vue'
-import {ref, type Ref, useTemplateRef} from 'vue'
+import {ref, type Ref} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {useScrollReveal} from '@/composables/useScrollReveal'
 
 const {t} = useI18n()
 const activeIndex: Ref<number | null> = ref(null)
-const servicesContainerRef = useTemplateRef<HTMLElement>('servicesContainerRef')
-const {isVisible} = useScrollReveal(servicesContainerRef, {threshold: 0.12})
 
 function toggleInfo(id: number) {
   activeIndex.value = activeIndex.value === id ? null : id
@@ -54,31 +52,7 @@ const services: Ref<Service[]> = ref([
   justify-content: center;
 }
 
-.service-card-item {
-  transition:
-    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 250ms ease-in-out;
-}
-
-.reveal:not(.is-visible) .service-card-item {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.reveal.is-visible .service-card-item {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .service-card-item:hover {
-  box-shadow: 0 6px 50px rgba(63, 81, 181, 0.25);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal:not(.is-visible) .service-card-item {
-    opacity: 1;
-    transform: none;
-  }
+  box-shadow: 0 6px 50px var(--brand-shadow);
 }
 </style>
